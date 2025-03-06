@@ -1,0 +1,15 @@
+#!/bin/sh
+
+current_root=$(bspc query --nodes --desktop .focused | head -n 1)
+echo $current_root
+
+# other_root=$(bspc query --monitor .\!focused -T --monitor | jq '.focusedDesktopId')
+other_desktop_id=$(bspc query -T --monitor prev | jq '.focusedDesktopId')
+other_desktop_id=$(printf '0x%08X\n' $other_desktop_id)
+echo $other_desktop_id
+
+other_root=$(bspc query -T --desktop $other_desktop_id | jq '.root.id')
+other_root=$(printf '0x%08X\n' $other_root)
+echo $other_root
+
+bspc node $current_root --swap $other_root --follow

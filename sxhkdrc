@@ -67,7 +67,7 @@ alt shift bracketleft
     bspc node --resize bottom 0 -50 || bspc node --resize top 0 -50
 
 alt Return
-    bspc node --swap biggest.local
+    "$BSPCONFIG/helpers/swap_desktops"
 
 alt o
     bspc desktop focused --layout next
